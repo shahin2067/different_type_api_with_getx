@@ -1,3 +1,5 @@
+import 'package:different_type_api_with_getx/views/category/category_details_screen.dart';
+import 'package:different_type_api_with_getx/views/category/category_view_screen.dart';
 import 'package:different_type_api_with_getx/views/create_user_screen.dart';
 import 'package:different_type_api_with_getx/views/home_screen.dart';
 import 'package:different_type_api_with_getx/views/splash_screen.dart';
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: HomeScreen.routeName, page: ()=> HomeScreen()),
         GetPage(name: CreateUserScreen.routeName, page: ()=> CreateUserScreen()),
         GetPage(name: UserListScreen.routeName, page: ()=> UserListScreen()),
+        GetPage(name: CategoryViewScreen.routeName, page: ()=> CategoryViewScreen()),
+        GetPage(name: CategoryDetailsScreen.routeName, page: ()=> CategoryDetailsScreen()),
       ],
     );
   }

@@ -52,6 +52,7 @@ class Controller extends GetxController{
         //print('Data: $data');
         var list = data.map((e) => Data.fromJson(e));
         userList.addAll(list);
+        print('userList: $userList');
         //print('Shahin: ${list[2].data![0].email}');
         print('Shahin: ${userList.length}');
 

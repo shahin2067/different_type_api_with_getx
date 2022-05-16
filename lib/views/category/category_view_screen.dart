@@ -20,6 +20,8 @@ class CategoryViewScreen extends StatelessWidget {
       ),
       body: Obx(()=>ListView.builder(
         itemCount: _controller.categoryData.length,
+        //itemCount: _controller.categoryData.length,
+        //itemCount: 5,
         itemBuilder: (context, index){
           return Card(
             child: InkWell(
@@ -34,19 +36,21 @@ class CategoryViewScreen extends StatelessWidget {
                     backgroundColor: Colors.white,
                     child: ClipRRect(
                       borderRadius:BorderRadius.circular(50),
-                      child: Image.network("https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"),
+                      //child: Image.network("https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"),
+                      child: Image.network(_controller.categoryData[index].image??''),
                     )
                 ),
                 title: Text(
-                  //${_controller.categoryData[index]}',
-                  'John Hardy Women\'s Legends Naga Gold & Silver Dragon Station Chain Bracelet',
+                  _controller.categoryData[index].title??'',
+                  //'John Hardy Women\'s Legends Naga Gold & Silver Dragon Station Chain Bracelet',
                   //maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: Text('\$695'),
+                subtitle: Text('\$${_controller.categoryData[index].price!.toDouble()}'),
+                //subtitle: Text('22'),
                 trailing: Icon(Icons.arrow_forward),
               ),
             ),

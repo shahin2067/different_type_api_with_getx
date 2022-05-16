@@ -1,13 +1,15 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:different_type_api_with_getx/models/productModel/ProductModel.dart';
+import 'package:different_type_api_with_getx/models/productCategoryModel/ProductCategoryModel.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class ProductCategoryController extends GetxController{
   var categoryList = [].obs;
-  var categoryData = [].obs;
-  RxObjectMixin<ProductModel> myCategoryData = ProductModel().obs;
+  var categoryData = <ProductCategoryModel>[].obs;
+  RxObjectMixin<ProductCategoryModel> myCategoryData = ProductCategoryModel().obs;
+  //RxList<ProductModel> myCategoryList = <ProductModel>[].obs;
+
 
   @override
   void onInit() {
@@ -34,7 +36,7 @@ class ProductCategoryController extends GetxController{
         if(response.statusCode == 200) {
           EasyLoading.showToast('Data loaded successfully', duration: const Duration(seconds: 2), toastPosition:EasyLoadingToastPosition.bottom );
           var jsonResponse = response.data;
-
+          //print('jsonResponse: ${response.data}');
           var data = jsonResponse as List;
           categoryList.addAll(jsonResponse);
 
@@ -60,19 +62,23 @@ class ProductCategoryController extends GetxController{
         EasyLoading.showToast('No Internet Connection');
       } else{
         EasyLoading.show(status: "Loading...");
+        print('Sahhin');
         var response = await dio.get('/products/category/$category');
         if(response.statusCode == 200){
           //EasyLoading.showToast('Data loaded successfully', duration: const Duration(seconds: 2), toastPosition:EasyLoadingToastPosition.bottom );
           var jsonResponse = response.data as List;
-          var list = jsonResponse.map((e) => ProductModel.fromJson(e));
+          //print('jsonResponse: ${response.data[1]}');
+          var list = jsonResponse.map((e) => ProductCategoryModel.fromJson(e));
+
           categoryData.clear();
           categoryData.addAll(list);
-          print('Data Length ${categoryData.length}');
-          //print('Title ${categoryData[1]}');
-          // print('Res: ${jsonResponse[5]['rating']}');
+          print('Sahhin1');
+          //print('categoryData: $categoryData');
+          //print('Data Length ${categoryData.length}');
 
-          //myCategoryData.value = ProductModel.fromJson(jsonResponse);
-          //print('Data Length ${myCategoryData.value.category}');
+
+          //myCategoryData.value = ProductCategoryModel.fromJson(jsonResponse);
+          //print('Data Length ${myCategoryData.value}');
 
 
         } else{
@@ -82,7 +88,7 @@ class ProductCategoryController extends GetxController{
       }
       
     } catch(e){
-      print('Error occurred: $e');
+      print('Error occurreds: $e');
     } finally {
       EasyLoading.dismiss();
     }
